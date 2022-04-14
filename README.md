@@ -1,4 +1,7 @@
 # TODO
 
-git-commit
+- [ ] React App
+- [ ] Typescript
+- [ ] Eslint + Perriter + Stylelint
+- [ ] git-commit
 
