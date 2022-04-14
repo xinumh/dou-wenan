@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "allowJs": true,
     "moduleResolution": "Node",
     "module": "ESNext",
     "target": "es5",
     "jsx": "react",
     "strict": true,
+    "sourceMap": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": "./src"
   },

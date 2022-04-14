@@ -1,0 +1,16 @@
+{
+  "endOfLine": "lf",
+  "tabWidth": 2,
+  "semi": false,
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  "trailingComma": "none",
+  "overrides": [
+    {
+      "files": ".prettierrc",
+      "options": {
+        "parser": "json"
+      }
+    }
+  ]
+}
