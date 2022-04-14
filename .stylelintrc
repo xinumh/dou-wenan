@@ -7,5 +7,8 @@
   "plugins": [
 		"stylelint-order"
 	],
+  "rules": {
+    "at-rule-no-unknown": null
+  },
   "ignoreFiles": ["node_modules/**/*", "build/**/*", "dist/**/*"]
 }

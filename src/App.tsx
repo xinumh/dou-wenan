@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from 'antd'
-import { UserInfoType } from '@type'
+import { UserInfoType } from '@/@type'
+import img from '@/assets/bg.jpg'
 import './App.less'
 
 interface IProps {
@@ -16,6 +17,7 @@ function App({ tab }: IProps) {
       <div>home {tab}</div>
       <div>user {user.username}</div>
       <Button type='primary'>Button</Button>
+      <img src={img} alt='' srcSet='' />
     </div>
   )
 }
