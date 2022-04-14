@@ -1,7 +1,7 @@
 # TODO
 
-- [ ] React App
-- [ ] Typescript
-- [ ] Eslint + Perriter + Stylelint
+- [x] React App
+- [x] Typescript
+- [x] Eslint + Perriter + Stylelint
 - [ ] git-commit
 
