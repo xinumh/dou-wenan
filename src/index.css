@@ -1,5 +1,6 @@
 body {
   font-family: "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  background: url('./assets/bg.jpg');
+
+  /* background: url('./assets/bg.jpg'); */
   background-size: cover;
 }
