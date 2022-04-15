@@ -5,7 +5,8 @@
 - [x] Typescript
 - [x] Eslint + Perriter + Stylelint
 - [x] Gzip
-- [x] Analyzer
+- [x] Analyzer (yarn analyzer)
 - [x] Router
+- [x] Router-Auth
 - [ ] git-commit
 

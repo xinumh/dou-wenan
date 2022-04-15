@@ -8,7 +8,8 @@
 		"stylelint-order"
 	],
   "rules": {
-    "at-rule-no-unknown": null
+    "at-rule-no-unknown": null,
+    "selector-pseudo-class-no-unknown": null
   },
   "ignoreFiles": ["node_modules/**/*", "build/**/*", "dist/**/*"]
 }

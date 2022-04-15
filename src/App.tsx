@@ -1,28 +1,33 @@
 import React from 'react'
-import { BrowserRouter, Link, useRoutes } from 'react-router-dom'
+import { BrowserRouter, useRoutes } from 'react-router-dom'
 import './App.less'
-import Home from './components/Home'
-import Login from './components/Login'
+import AuthProvider, { RequireAuth } from './AuthProvider'
+import Home from '@/pages/Home'
+import Login from '@/pages/Login'
+import Layout from '@/pages/Layout'
 
 function Router() {
   const routes = useRoutes([
-    { path: '/', element: <Home /> },
-    { path: '/login', element: <Login /> }
+    { path: '/', element: <Layout /> },
+    { path: '/login', element: <Login /> },
+    {
+      path: '/home',
+      element: (
+        <RequireAuth>
+          <Home />
+        </RequireAuth>
+      )
+    }
   ])
   return routes
 }
-
 function App() {
   return (
-    <BrowserRouter>
-      <nav>
-        <ol>
-          <Link to='/'>home</Link>
-          <Link to='/login'>login</Link>
-        </ol>
-      </nav>
-      <Router />
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
 

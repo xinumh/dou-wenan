@@ -28,7 +28,10 @@
   },
   "rules": {
     "@typescript-eslint/no-var-requires": "OFF",
+    "@typescript-eslint/no-non-null-assertion": "OFF",
+    "@typescript-eslint/no-explicit-any": "OFF",
     "import/no-extraneous-dependencies": "OFF",
+    "import/prefer-default-export": "OFF",
     "import/no-unresolved": "OFF",
     "import/order": ["error", {"groups": ["builtin", "external", "parent", "sibling", "index"]}],
     "import/extensions": [
