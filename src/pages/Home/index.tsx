@@ -1,11 +1,11 @@
 import React from 'react'
-import AuthStatus from '@/AuthStatus'
+import { Link } from 'react-router-dom'
 
 function Home() {
   return (
     <div>
-      <AuthStatus />
-      Home
+      <p>Home</p>
+      <Link to='/layout'>to Layout</Link>
     </div>
   )
 }

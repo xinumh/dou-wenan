@@ -8,13 +8,13 @@ import Layout from '@/pages/Layout'
 
 function Router() {
   const routes = useRoutes([
-    { path: '/', element: <Layout /> },
+    { path: '/', element: <Home /> },
     { path: '/login', element: <Login /> },
     {
-      path: '/home',
+      path: '/layout',
       element: (
         <RequireAuth>
-          <Home />
+          <Layout />
         </RequireAuth>
       )
     }
