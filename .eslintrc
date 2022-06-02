@@ -18,10 +18,12 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".tsx", ".ts", ".js", ".json"]
-      },
-      "alias": {
-        "map": [["@", "./src/"]]
+        "extensions": [
+          ".tsx",
+          ".ts",
+          ".js",
+          ".json"
+        ]
       },
       "typescript": {}
     }
@@ -30,10 +32,22 @@
     "@typescript-eslint/no-var-requires": "OFF",
     "@typescript-eslint/no-non-null-assertion": "OFF",
     "@typescript-eslint/no-explicit-any": "OFF",
+    "no-console": "off",
     "import/no-extraneous-dependencies": "OFF",
     "import/prefer-default-export": "OFF",
     "import/no-unresolved": "OFF",
-    "import/order": ["error", {"groups": ["builtin", "external", "parent", "sibling", "index"]}],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "parent",
+          "sibling",
+          "index"
+        ]
+      }
+    ],
     "import/extensions": [
       "ERROR",
       "ignorePackages",
@@ -43,6 +57,16 @@
         "js": "never"
       }
     ],
-    "react/jsx-filename-extension": ["ERROR", { "extensions": [".tsx", ".ts", ".jsx", ".js"]}]
+    "react/jsx-filename-extension": [
+      "ERROR",
+      {
+        "extensions": [
+          ".tsx",
+          ".ts",
+          ".jsx",
+          ".js"
+        ]
+      }
+    ]
   }
 }

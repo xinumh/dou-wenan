@@ -1,33 +1,14 @@
-import React from 'react'
-import { BrowserRouter, useRoutes } from 'react-router-dom'
-import './App.less'
-import AuthProvider, { RequireAuth } from './AuthProvider'
-import Home from '@/pages/Home'
-import Login from '@/pages/Login'
-import Layout from '@/pages/Layout'
+import { useRoutes } from "react-router-dom"
+import routes from '@/routes/index'
 
-function Router() {
-  const routes = useRoutes([
-    { path: '/', element: <Home /> },
-    { path: '/login', element: <Login /> },
-    {
-      path: '/layout',
-      element: (
-        <RequireAuth>
-          <Layout />
-        </RequireAuth>
-      )
-    }
-  ])
-  return routes
-}
 function App() {
+
+  const element = useRoutes(routes)
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Router />
-      </BrowserRouter>
-    </AuthProvider>
+    <div>
+      <h1>Route Objects Example</h1>
+      {element}
+    </div>
   )
 }
 
