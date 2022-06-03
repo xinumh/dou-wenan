@@ -19,7 +19,10 @@ const BASE_URL = ''
 
 const service = axios.create({
   // baseURL: baseApiUrl,
-  timeout: 6000
+  timeout: 6000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
 })
 
 service.interceptors.request.use(
@@ -37,9 +40,10 @@ service.interceptors.request.use(
 )
 
 service.interceptors.response.use((response) => {
+  console.log('response', response)
   const res = response.data
-  if (res.code !== 200) {
-    alert(res.message)
+  if (res.code !== 0) {
+    message.error(res.message)
     return Promise.reject(res)
   }
   return res
@@ -74,9 +78,9 @@ export const request = async <T = any>(
     config.url = fullUrl.replace(/(?<!:)\/{2,}/g, '/')
 
     const res = await service.request(config)
-    message.error('111')
     return isGetDataDirectly ? res.data : res
   } catch (error) {
+    console.log('error', error)
     return Promise.reject(error)
   }
 }

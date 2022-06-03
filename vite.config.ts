@@ -6,8 +6,8 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src")
-    },
+      '@': path.resolve(__dirname, 'src')
+    }
   },
   plugins: [react()],
   css: {
@@ -15,6 +15,12 @@ export default defineConfig({
       less: {
         javascriptEnabled: true
       }
+    }
+  },
+  server: {
+    port: 9000,
+    proxy: {
+      '/api': 'http://localhost:3000/'
     }
   }
 })

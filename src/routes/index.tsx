@@ -4,6 +4,7 @@ import Courses from "@/pages/Courses"
 import CoursesIndex from "@/pages/CoursesIndex"
 import Layout from "@/pages/Layout"
 import NoMatch from "@/pages/NoMatch"
+import Home from '@/pages/Home'
 
 
 const routes: RouteObject[] = [
@@ -13,7 +14,7 @@ const routes: RouteObject[] = [
     children: [
       {
         index: true,
-        element: 'Home'
+        element: <Home />
       },
       {
         path: '/courses',
