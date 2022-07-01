@@ -1,13 +1,16 @@
-import { RouteObject, useRoutes } from "react-router-dom"
+import { RouteObject, useRoutes } from 'react-router-dom'
 import Course from '@/pages/Course'
-import Courses from "@/pages/Courses"
-import CoursesIndex from "@/pages/CoursesIndex"
-import Layout from "@/pages/Layout"
-import NoMatch from "@/pages/NoMatch"
+import Courses from '@/pages/Courses'
+import CoursesIndex from '@/pages/CoursesIndex'
+import Layout from '@/components/Layout'
+import NoMatch from '@/pages/NoMatch'
 import Home from '@/pages/Home'
 
-
 const routes: RouteObject[] = [
+  {
+    path: '/login',
+    element: <Layout />
+  },
   {
     path: '/',
     element: <Layout />,
@@ -22,7 +25,7 @@ const routes: RouteObject[] = [
         children: [
           {
             index: true,
-            element: <CoursesIndex />,
+            element: <CoursesIndex />
           },
           {
             path: '/courses/:id',
@@ -34,6 +37,5 @@ const routes: RouteObject[] = [
     ]
   }
 ]
-
 
 export default routes
