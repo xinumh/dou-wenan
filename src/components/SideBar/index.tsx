@@ -6,12 +6,12 @@ import type { MenuProps } from 'antd'
 import logo from '@/assets/logo.svg'
 import './index.less'
 import {
-  AppstoreOutlined,
-  CalendarOutlined,
-  LinkOutlined,
-  MailOutlined,
-  SettingOutlined
+  HomeOutlined,
+  ProfileOutlined,
+  SettingOutlined,
+  UnlockOutlined
 } from '@ant-design/icons'
+import { SelectEventHandler } from 'rc-menu/lib/interface'
 const { SubMenu } = Menu
 
 type SideBarProps = {
@@ -20,7 +20,8 @@ type SideBarProps = {
 }
 type MenuItem = Required<MenuProps>['items'][number]
 function SideBar({ collapsed, onToogle }: SideBarProps) {
-  const [current, setCurrent] = React.useState('mail')
+  const [current, setCurrent] = React.useState('home')
+  const [subCurrent, setSubCurrent] = React.useState(['1'])
 
   const subMenuClassName = classNames({
     'sub-menu-wrap': true,
@@ -38,9 +39,24 @@ function SideBar({ collapsed, onToogle }: SideBarProps) {
   ]
   const items: MenuProps['items'] = [
     {
+      label: '首页',
+      key: 'home',
+      icon: <HomeOutlined />
+    },
+    {
+      label: '权限',
+      key: 'lock',
+      icon: <UnlockOutlined />
+    },
+    {
+      label: '设置',
+      key: 'setting',
+      icon: <SettingOutlined />
+    },
+    {
       label: '菜单',
-      key: 'mail',
-      icon: <MailOutlined />
+      key: 'menu',
+      icon: <ProfileOutlined />
     }
   ]
 
@@ -82,6 +98,14 @@ function SideBar({ collapsed, onToogle }: SideBarProps) {
     )
   ]
 
+  const handleSelect: MenuProps['onSelect'] = ({ key }) => {
+    setCurrent(key)
+    collapsed && onToogle()
+  }
+  const handleSubSelect: MenuProps['onSelect'] = ({ key }) => {
+    setSubCurrent([key])
+  }
+
   return (
     <div className='sidebar'>
       <IconSvg
@@ -96,14 +120,23 @@ function SideBar({ collapsed, onToogle }: SideBarProps) {
           <img className='logo' src={logo} alt='' />
         </div>
         <div className='menu'>
-          <Menu items={items} selectedKeys={[current]}></Menu>
+          <Menu
+            items={items}
+            selectedKeys={[current]}
+            onSelect={handleSelect}
+          ></Menu>
         </div>
       </div>
       <div className={subMenuClassName}>
         <div className='menu-header border-b'>
           <div className='menu-header-name'>商品</div>
         </div>
-        <Menu items={subItems} mode='inline'></Menu>
+        <Menu
+          items={subItems}
+          mode='inline'
+          selectedKeys={subCurrent}
+          onSelect={handleSubSelect}
+        ></Menu>
       </div>
     </div>
   )
