@@ -18,10 +18,22 @@ type SideBarProps = {
   collapsed: boolean
   onToogle: () => void
 }
+type MenuDataItemProps = {
+  id: number
+  parentId: number
+  name: string
+  title: string
+  sort: number
+  hidden: 0 | 1
+  createTime: string
+  level: 0 | 1
+  icon?: string
+}
 type MenuItem = Required<MenuProps>['items'][number]
 function SideBar({ collapsed, onToogle }: SideBarProps) {
-  const [current, setCurrent] = React.useState('home')
+  const [current, setCurrent] = React.useState('pms')
   const [subCurrent, setSubCurrent] = React.useState(['1'])
+  const [menuData, setMenuData] = React.useState<MenuDataItemProps[]>([])
   let navigate = useNavigate()
 
   const subMenuClassName = classNames({
@@ -29,10 +41,37 @@ function SideBar({ collapsed, onToogle }: SideBarProps) {
     hide: collapsed
   })
 
-  React.useEffect(() => {
-    fetchUserInfo({})
-  })
+  const getMenus = React.useCallback(async () => {
+    const data = await fetchUserInfo({})
+    setMenuData(data.menus)
+  }, [fetchUserInfo])
 
+  React.useEffect(() => {
+    getMenus()
+  }, [])
+
+  /* 一级菜单 */
+  function level1Menus(initData: MenuDataItemProps[]): MenuProps['items'] {
+    return initData
+      .filter((item, index) => item.level === 0)
+      .map((item, index) => ({
+        label: item.title,
+        key: item.name,
+        icon: <HomeOutlined />
+      }))
+  }
+  /* 二级菜单 */
+  function level2Menus(
+    initData: MenuDataItemProps[],
+    parentId: number
+  ): MenuItem[] {
+    return initData
+      .filter((item, index) => item.level === 1 && item.parentId === parentId)
+      .map((item, index) => ({
+        label: item.title,
+        key: item.name
+      }))
+  }
   const items: MenuProps['items'] = [
     {
       label: '首页',
@@ -118,7 +157,7 @@ function SideBar({ collapsed, onToogle }: SideBarProps) {
         </div>
         <div className='menu'>
           <Menu
-            items={items}
+            items={level1Menus(menuData)}
             selectedKeys={[current]}
             onSelect={handleSelect}
           ></Menu>
@@ -129,7 +168,7 @@ function SideBar({ collapsed, onToogle }: SideBarProps) {
           <div className='menu-header-name'>商品</div>
         </div>
         <Menu
-          items={subItems}
+          items={level2Menus(menuData)}
           mode='inline'
           selectedKeys={subCurrent}
           onSelect={handleSubSelect}

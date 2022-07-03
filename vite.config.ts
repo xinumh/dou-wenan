@@ -29,6 +29,9 @@ export default defineConfig({
     port: 9000,
     proxy: {
       '/api': 'http://yapi.wonder.wang/mock/11/'
+    },
+    hmr: {
+      overlay: false
     }
   }
 })

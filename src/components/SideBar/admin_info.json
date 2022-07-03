@@ -1,9 +1,10 @@
-// 登录菜单
 {
   "code": 200,
   "message": "操作成功",
   "data": {
-    "roles": ["超级管理员"],
+    "roles": [
+      "超级管理员"
+    ],
     "icon": "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20180607/timg.jpg",
     "menus": [
       {
