@@ -4,15 +4,15 @@ import IconSvg from '@/components/Icon'
 import { Menu } from 'antd'
 import type { MenuProps } from 'antd'
 import logo from '@/assets/logo.svg'
-import './index.less'
 import {
   HomeOutlined,
   ProfileOutlined,
   SettingOutlined,
   UnlockOutlined
 } from '@ant-design/icons'
-import { SelectEventHandler } from 'rc-menu/lib/interface'
-const { SubMenu } = Menu
+import { useNavigate } from 'react-router-dom'
+import { fetchUserInfo } from './service'
+import './index.less'
 
 type SideBarProps = {
   collapsed: boolean
@@ -22,21 +22,17 @@ type MenuItem = Required<MenuProps>['items'][number]
 function SideBar({ collapsed, onToogle }: SideBarProps) {
   const [current, setCurrent] = React.useState('home')
   const [subCurrent, setSubCurrent] = React.useState(['1'])
+  let navigate = useNavigate()
 
   const subMenuClassName = classNames({
     'sub-menu-wrap': true,
     hide: collapsed
   })
 
-  const itemsData = [
-    { label: '菜单项一', key: 'item-1' }, // 菜单项务必填写 key
-    { label: '菜单项二', key: 'item-2' },
-    {
-      label: '子菜单',
-      key: 'submenu',
-      children: [{ label: '子菜单项', key: 'submenu-item-1' }]
-    }
-  ]
+  React.useEffect(() => {
+    fetchUserInfo({})
+  })
+
   const items: MenuProps['items'] = [
     {
       label: '首页',
@@ -45,7 +41,7 @@ function SideBar({ collapsed, onToogle }: SideBarProps) {
     },
     {
       label: '权限',
-      key: 'lock',
+      key: 'courses',
       icon: <UnlockOutlined />
     },
     {
@@ -99,6 +95,7 @@ function SideBar({ collapsed, onToogle }: SideBarProps) {
   ]
 
   const handleSelect: MenuProps['onSelect'] = ({ key }) => {
+    navigate(key, { replace: true })
     setCurrent(key)
     collapsed && onToogle()
   }

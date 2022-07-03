@@ -5,15 +5,22 @@ import CoursesIndex from '@/pages/CoursesIndex'
 import Layout from '@/components/Layout'
 import NoMatch from '@/pages/NoMatch'
 import Home from '@/pages/Home'
+import RequireAuth from '@/components/AuthProvider/RequireAuth'
+import Login from '@/pages/Login'
 
 const routes: RouteObject[] = [
   {
     path: '/login',
-    element: <Layout />
+    element: <Login />
   },
+  { path: '*', element: <NoMatch /> },
   {
     path: '/',
-    element: <Layout />,
+    element: (
+      <RequireAuth>
+        <Layout />
+      </RequireAuth>
+    ),
     children: [
       {
         index: true,
@@ -32,8 +39,7 @@ const routes: RouteObject[] = [
             element: <Course />
           }
         ]
-      },
-      { path: '*', element: <NoMatch /> }
+      }
     ]
   }
 ]

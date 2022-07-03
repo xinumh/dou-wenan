@@ -1,18 +1,40 @@
 import { DownOutlined, LogoutOutlined } from '@ant-design/icons'
-import { Avatar, Breadcrumb, Button, Dropdown, Menu, Space } from 'antd'
-import style from './index.module.less'
+import {
+  Avatar,
+  Breadcrumb,
+  Button,
+  Dropdown,
+  Menu,
+  MenuProps,
+  Space
+} from 'antd'
 import avatar from '@/assets/avatar.gif'
+import './index.less'
+import { useAuth } from '@/components/AuthProvider/useAuth'
+import { useNavigate } from 'react-router-dom'
 
 export default function Header() {
-  const menu = (
-    <Menu>
-      <Menu.Item key='1' icon={<LogoutOutlined />}>
-        退出登录
-      </Menu.Item>
-    </Menu>
-  )
+  const auth = useAuth()
+  const navigate = useNavigate()
+  const menus = [
+    {
+      label: '退出登录',
+      key: 'logout',
+      icon: <LogoutOutlined />
+    }
+  ]
+
+  const handleMenu: MenuProps['onClick'] = ({ key }) => {
+    switch (key) {
+      case 'logout':
+        auth.signout(() => {
+          navigate('/login')
+        })
+    }
+  }
+
   return (
-    <div className={style.header}>
+    <div className='header'>
       <div className='p-3'>
         <Breadcrumb separator='>'>
           <Breadcrumb.Item>Home</Breadcrumb.Item>
@@ -28,7 +50,7 @@ export default function Header() {
       <Space size={10} className='w-32'>
         <Avatar src={avatar} />
         <Dropdown
-          overlay={menu}
+          overlay={<Menu items={menus} onClick={handleMenu} />}
           trigger={['click']}
           className='text-center mr-3'
           placement='bottom'

@@ -28,7 +28,7 @@ export default defineConfig({
   server: {
     port: 9000,
     proxy: {
-      '/api': 'http://localhost:3000/'
+      '/api': 'http://yapi.wonder.wang/mock/11/'
     }
   }
 })
