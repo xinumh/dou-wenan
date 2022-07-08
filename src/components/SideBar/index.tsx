@@ -32,7 +32,7 @@ type MenuDataItemProps = {
 type MenuItem = Required<MenuProps>['items'][number]
 function SideBar({ collapsed, onToogle }: SideBarProps) {
   const [current, setCurrent] = React.useState('pms')
-  const [subCurrent, setSubCurrent] = React.useState(['1'])
+  const [subCurrent, setSubCurrent] = React.useState<string[]>([])
   const [menuData, setMenuData] = React.useState<MenuDataItemProps[]>([])
   let navigate = useNavigate()
 
@@ -46,9 +46,9 @@ function SideBar({ collapsed, onToogle }: SideBarProps) {
     setMenuData(data.menus)
   }, [fetchUserInfo])
 
-  React.useEffect(() => {
-    getMenus()
-  }, [])
+  // React.useEffect(() => {
+  //   getMenus()
+  // }, [])
 
   /* 一级菜单 */
   function level1Menus(initData: MenuDataItemProps[]): MenuProps['items'] {
@@ -133,14 +133,24 @@ function SideBar({ collapsed, onToogle }: SideBarProps) {
     )
   ]
 
+  const subItems2: MenuItem[] = [
+    getItem('金融管理', '11'),
+    getItem('XXXXXXX', '22')
+  ]
+
   const handleSelect: MenuProps['onSelect'] = ({ key }) => {
-    navigate(key, { replace: true })
+    // navigate(key, { replace: true })
     setCurrent(key)
+    setSubCurrent(key === 'courses' ? ['2'] : ['11'])
     collapsed && onToogle()
   }
   const handleSubSelect: MenuProps['onSelect'] = ({ key }) => {
     setSubCurrent([key])
   }
+
+  const toSubMenus = React.useCallback(() => {
+    return current === 'courses' ? subItems : subItems2
+  }, [current])
 
   return (
     <div className='sidebar'>
@@ -156,11 +166,7 @@ function SideBar({ collapsed, onToogle }: SideBarProps) {
           <img className='logo' src={logo} alt='' />
         </div>
         <div className='menu'>
-          <Menu
-            items={level1Menus(menuData)}
-            selectedKeys={[current]}
-            onSelect={handleSelect}
-          ></Menu>
+          <Menu items={items} onSelect={handleSelect}></Menu>
         </div>
       </div>
       <div className={subMenuClassName}>
@@ -168,7 +174,7 @@ function SideBar({ collapsed, onToogle }: SideBarProps) {
           <div className='menu-header-name'>商品</div>
         </div>
         <Menu
-          items={level2Menus(menuData)}
+          items={toSubMenus()}
           mode='inline'
           selectedKeys={subCurrent}
           onSelect={handleSubSelect}
