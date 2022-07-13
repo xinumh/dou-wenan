@@ -1,4 +1,9 @@
-import { DownOutlined, LogoutOutlined } from '@ant-design/icons'
+import {
+  DownOutlined,
+  LogoutOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined
+} from '@ant-design/icons'
 import {
   Avatar,
   Breadcrumb,
@@ -12,8 +17,13 @@ import avatar from '@/assets/avatar.gif'
 import './index.less'
 import { useAuth } from '@/components/AuthProvider/useAuth'
 import { useNavigate } from 'react-router-dom'
+import React from 'react'
 
-export default function Header() {
+type IHeaderProps = {
+  collapsed: boolean
+  trigger: (val: boolean) => void
+}
+export default function LayoutHeader({ collapsed, trigger }: IHeaderProps) {
   const auth = useAuth()
   const navigate = useNavigate()
   const menus = [
@@ -34,19 +44,12 @@ export default function Header() {
   }
 
   return (
-    <div className='header'>
-      <div className='p-3'>
-        <Breadcrumb separator='>'>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>
-            <a href=''>Application Center</a>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>
-            <a href=''>Application List</a>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>An Application</Breadcrumb.Item>
-        </Breadcrumb>
-      </div>
+    <header className='layout-header'>
+      {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+        className: 'trigger',
+        onClick: () => trigger(!collapsed)
+      })}
+
       <Space size={10} className='w-32'>
         <Avatar src={avatar} />
         <Dropdown
@@ -64,6 +67,6 @@ export default function Header() {
           </a>
         </Dropdown>
       </Space>
-    </div>
+    </header>
   )
 }
