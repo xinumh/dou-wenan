@@ -56,7 +56,7 @@ export const getOpenKeys = (path: string) => {
 }
 
 const data = [
-  { icon: 'HomeOutlined', path: '/home', title: '首页' },
+  { icon: 'HomeOutlined', path: '/dashboard', title: '首页' },
   {
     icon: 'TableOutlined',
     path: '/permission',
@@ -76,12 +76,12 @@ const data = [
   },
   {
     icon: 'FundOutlined',
-    path: '/dashboard',
-    title: 'Dashboard',
+    path: '/courses',
+    title: 'Courses',
     children: [
       {
         icon: 'AppstoreOutlined',
-        path: '/dashboard/dataVisualize',
+        path: '/courses/dataVisualize',
         title: '数据可视化'
       }
     ]
